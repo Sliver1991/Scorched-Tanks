@@ -3,8 +3,8 @@ import pygame
 pygame.init()
 width, height = pygame.display.list_modes()[0]
 print(width,height)
-gameDisplay = pygame.display.set_mode((width,height))
-pygame.display.set_caption('A bit Racey')
+gameDisplay = pygame.display.set_mode()
+pygame.display.set_caption('Scorched Tanks')
 clock = pygame.time.Clock()
 pygame.display.toggle_fullscreen()
 
