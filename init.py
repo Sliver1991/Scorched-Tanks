@@ -3,7 +3,7 @@ import pygame
 pygame.init()
 width, height = pygame.display.list_modes()[0]
 
-colors = {"white":(255,255,255),"black":(0,0,0)}
+colors = {"white":(255,255,255),"black":(0,0,0),"brown":(165,42,42)}
 
 
 #width -= 20
@@ -23,6 +23,13 @@ def gameFrame():
     frameH = height*0.8
     drawSquare(colors["white"],frameX,frameY,frameW,frameH)
     
+def gameMap():
+    x = width*0.05
+    y = height*0.6
+    w = width*0.8
+    h = height*0.25
+    drawSquare(colors["brown"],x,y,w,h)
+    
 game = True
 while game:
     for event in pygame.event.get():
@@ -35,6 +42,7 @@ while game:
                   
     gameDisplay.fill(colors["black"])
     gameFrame()
+    gameMap()
     pygame.display.update()
     
     clock.tick(60)
