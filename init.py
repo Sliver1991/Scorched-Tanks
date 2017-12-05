@@ -4,7 +4,11 @@ pygame.init()
 width, height = pygame.display.list_modes()[0]
 
 colors = {"white":(255,255,255),"black":(0,0,0),"brown":(165,42,42)}
+#gameMap = [[colors["white"] if y<height*0.6 else colors["brown"] for x in range(int(width*0.8))] for y in range(int(height*0.8))]
 
+"""
+    read into surfarray for a potential method of using matrix to draw the map
+"""
 
 #width -= 20
 #height -= 100
