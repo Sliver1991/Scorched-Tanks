@@ -26,7 +26,11 @@ def button(msg,x,y,w,h,tc,ts,ic,ac, action=None):
     
     ic: Inactive color (when a mouse is not hovering).
     
-    ac: Active color (when a mouse is hovering)."""
+    ac: Active color (when a mouse is hovering).
+    
+    tc = text color
+    
+    ts = text size"""
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     if x+w > mouse[0] > x and y+h > mouse[1] > y:

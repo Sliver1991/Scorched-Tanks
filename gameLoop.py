@@ -10,7 +10,6 @@ player.nextPlayer()
             
 while game:
     active = player.active
-    keys = pygame.key.get_pressed()
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -21,16 +20,27 @@ while game:
                 game = False
             
             if event.key == pygame.K_UP:
-                player.power += 5
+                if player.power<100:
+                    player.power += 5
                 
             if event.key == pygame.K_DOWN:
-                player.power -= 5
+                if player.power>0:
+                    player.power -= 5
                 
             if event.key == pygame.K_LEFT:
-                player.angle -= 5
+                if player.angle>-20:
+                    player.angle -= 5
+                if player.angle==90:
+                    player.angle==85    
             
             if event.key == pygame.K_RIGHT:
-                player.angle += 5
+                if player.angle < 200:
+                    player.angle += 5
+                if player.angle==90:
+                    player.angle==95
+                    
+            if event.key == pygame.K_p:
+                player.nextPlayer()
                 
             if event.key == pygame.K_d:
                 if player.movesLeft>0 and active["x"]>init.gameSize["x"]:
@@ -50,10 +60,13 @@ while game:
     mapDraw.drawMap()
     for team in tanks.tanks:
         for tank in team:
-            tanks.drawTank(tank)
+            if tank==active:
+                tanks.drawTank(tank,player.angle)
+            else:
+                tanks.drawTank(tank)
             
     interface.drawInterface()
-    interface.drawStats(player.power,player.angle)
+    interface.drawStats(player.power,player.angle,player.active["player"])
     pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
     init.gameDisplay.blit(init.surface, (0, 0))
     pygame.display.update()

@@ -1,4 +1,4 @@
-import init,text,colors,player
+import init,text,colors
 
 def drawInterface():
     text.message_display("Power:",50,colors.RED1,init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+40)
@@ -8,11 +8,9 @@ def drawInterface():
     text.button("Ballistic",init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+560,100,30,colors.BLACK,30,colors.GRAY,colors.RED1)
     text.button("Guided",init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+610,100,30,colors.BLACK,30,colors.GRAY,colors.RED1)
     text.button("Crazy",init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+660,100,30,colors.BLACK,30,colors.GRAY,colors.RED1)
-    
-    text.button("Pass",init.gameSize["x"]+init.gameSize["width"]-20,init.gameSize["y"]+800,200,100,colors.BLACK,60,colors.RED1,colors.RED2,player.nextPlayer)
-def drawStats(p,a):
+
+def drawStats(p,a,n):
     text.message_display(str(p),30,colors.RED1,init.gameSize["x"]+init.gameSize["width"]+10,init.gameSize["y"]+100)
     text.message_display(str(a),30,colors.RED1,init.gameSize["x"]+init.gameSize["width"]+10,init.gameSize["y"]+300)
+    text.message_display(str(n)+"'s turn",50,colors.RED1,(init.gameSize["x"]+init.gameSize["width"])/2,init.gameSize["y"]+50)
     
-
-        
