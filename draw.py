@@ -1,8 +1,8 @@
 import pygame,init
 
 def drawSquare(x,y, w, h, color):
-    square = pygame.Rect((x,y), (w, h))
-    pygame.draw.rect(init.surface, color, square)
+    #square = pygame.Rect((x,y), (w, h))
+    pygame.draw.rect(init.surface, color, [x,y,w,h])
 
 def drawPixel(loc_x,loc_y, color):
     pixAr = pygame.PixelArray(init.surface)

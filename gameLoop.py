@@ -15,10 +15,11 @@ while game:
     init.surface.fill(colors.BLACK)
     mapDraw.gameFrame()
     mapDraw.drawMap()
-    #pygame.transform.scale(init.surface, (init.screen[0] / init.res["width"], init.screen[1] / init.res["height"]), DestSurface=init.surface)
+    pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
     init.gameDisplay.blit(init.surface, (0, 0))
     pygame.display.update()
     
     clock.tick(60)
 
+#print(init.gameMap)
 pygame.quit()
