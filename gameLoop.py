@@ -1,4 +1,4 @@
-import pygame,init, mapDraw, colors
+import pygame,init, mapDraw, colors,tanks
 
 clock = pygame.time.Clock()
 game = True
@@ -15,6 +15,9 @@ while game:
     init.surface.fill(colors.BLACK)
     mapDraw.gameFrame()
     mapDraw.drawMap()
+    for team in tanks.tanks:
+        for tank in team:
+            tanks.drawTank(tank)
     pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
     init.gameDisplay.blit(init.surface, (0, 0))
     pygame.display.update()

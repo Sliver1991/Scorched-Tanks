@@ -5,4 +5,3 @@ def drawMap():
 
 def gameFrame():
     draw.drawSquare(init.gameSize['x'],init.gameSize['y'],init.gameSize['width']-init.gameSize['x'],init.gameSize['height']-init.gameSize['y'],colors.WHITE)
-    draw.drawSquare(100,150,100,150,colors.WHITE)
