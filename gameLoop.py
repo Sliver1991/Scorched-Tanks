@@ -1,4 +1,4 @@
-import pygame,init, mapDraw, colors,tanks, interface, player
+import pygame,init, mapDraw, colors,tanks, interface,player,fire, endgame
 
 
 clock = pygame.time.Clock()
@@ -53,8 +53,14 @@ while game:
                     player.movesLeft-=1
                     active["x"]-=10
                     active["y"]=tanks.findHeight(active["x"])
-        
+            
+            if event.key ==pygame.K_SPACE:
+                fire.fire(active['x']+100,active['y'],interface.attack,player.angle,player.power)
+                player.nextPlayer()
               
+    if tanks.checkEnd:
+        endgame.endGame()
+        
     init.surface.fill(colors.BLACK)
     mapDraw.gameFrame()
     mapDraw.drawMap()

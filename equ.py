@@ -18,13 +18,16 @@ def MakeEquationDic():
     def talulShot(angle, power, x):
         return  math.tan(math.radians(angle))*x**2+power*x
     
-    def munjeShot(angle,power):
-        return math.tan(math.radians(angle))*math.log(power)
+    def munjeShot(angle,power,x):
+        return math.tan(math.radians(angle))*math.log(x,power)
     
     def crazyShot(angle,power,x):
         return math.tan(math.radians(angle))*math.sin(math.radians(power*x))
 
     return {"talulShot":talulShot,"liniarShot":liniarShot,"munjeShot":munjeShot,"crazyShot":crazyShot}
+
+def distance(x1,y1,x2,y2):
+    return int(math.sqrt((x1-x2)**2+(y1-y2)**2))
 
 linear = MakeEquationDic()["liniarShot"]
 ballistic  = MakeEquationDic()["talulShot"]

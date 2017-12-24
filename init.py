@@ -11,6 +11,7 @@ res={"width":1920, "height":1080}
 gameSize = {"x":96, "y":54,"width":1536, "height":918}
 screen = (1920, 1080)
 surface = pygame.Surface((res["width"], res["height"]))
+rules = {"radius":100,"damage":100,"health":100}
 #ameDisplay = pygame.display.set_mode((0, 0),pygame.FULLSCREEN)
 pygame.display.set_caption('Scorched Tanks')
 
