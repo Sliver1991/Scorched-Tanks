@@ -33,7 +33,7 @@ def drawCircle(loc_x,loc_y, radius, color):
 def drawPoly(color,locList):
     pygame.draw.polygon(gameDisplay, color,locList)
     
-def button(msg,x,y,w,h,ic,ac):
+def button(msg,x,y,w,h,ic,ac, action=None):
     """msg: What do you want the button to say on it.
 
     x: The x location of the top left coordinate of the button box.
