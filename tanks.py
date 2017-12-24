@@ -1,5 +1,10 @@
 import draw, init, colors
 
+def findHeight(x):
+    for pos_x,pos_y in init.gameMap:
+        if pos_x == x:
+            return pos_y
+        
 tanks = []
 teams = [["Slava"],["Daniel","Mathias"]]
 i=1
@@ -12,9 +17,10 @@ for team in teams:
 
 for team in tanks:
     for tank in team:
-        tank["x"],tank["y"]=tank["turn"]*300,init.gameSize['height']-100
+        tank["x"]=tank["turn"]*300
+        tank["y"]=findHeight(tank["x"])
         
-
+players = i
 
 def drawTank(tank):
     draw.drawCircle(tank["x"],tank["y"]-50,15,colors.BLUE)
