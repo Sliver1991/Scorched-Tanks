@@ -52,3 +52,4 @@ def clickableImage(image,x,y, action=None):
     if x+w > mouse[0] > x and y+h > mouse[1] > y:
         if click[0] == 1 and action != None:
             action()
+            pygame.time.delay(200)

@@ -1,4 +1,4 @@
-import init, text, colors, pygame, textInput, draw , time
+import init, text, colors, pygame, textInput, draw
 
 def rulesMenu():
     

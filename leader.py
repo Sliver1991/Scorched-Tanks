@@ -36,7 +36,7 @@ def updateLeaders(leaders):
             data['players'].append({
                     "name":player['name'],
                     'kills':player['kills'],
-                    'deaths':player['death'],
+                    'deaths':int(player['death']),
                     'wins':int(player['victor']),
                     'loses':1 if not leaders['players'][i]['victor'] else 0})
     else:

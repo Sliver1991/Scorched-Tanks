@@ -1,4 +1,4 @@
-import pygame, leader, init,text,colors,time
+import pygame, leader, init,text,colors
     
 def leaderboard():
     data = leader.readLeaders()

@@ -10,7 +10,7 @@ teams = []
 players = 0
 
 def turnOrder(playerCount):
-    turn = list(range(1,players+1))
+    turn = list(range(1,playerCount+1))
     random.shuffle(turn)
     return turn
 
@@ -43,13 +43,6 @@ def genTanks():
     for team in tanks:
         for tank in team:
             genPos(tank)
-
-#    tankPos = []
-#    for team in tanks:
-#        for tank in team:
-#            tank["x"]=tank["turn"]*300
-#            tank["y"]=findHeight(tank["x"])-50
-#            tankPos.append([tank,tank["x"],tank["y"]])
 
 def tanksDamaged(x,y):
     """Handles damaging mechanism. Using the blast center, updates HP of all damaged tanks.

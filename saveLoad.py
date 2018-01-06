@@ -1,4 +1,4 @@
-import shelve, init, tanks, player, textInput, os, draw, text, colors,pygame,time
+import shelve, init, tanks, player, textInput, os, draw, text, colors,pygame
 
 status = True
 

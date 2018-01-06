@@ -1,1 +1,1 @@
-{"players": [{"name": "Player1", "kills": 0, "deaths": 3, "wins": 4, "loses": 1}, {"name": "Player2", "kills": 0, "deaths": 4, "wins": 3, "loses": 4}]}
+{"players": [{"name": "Player1", "kills": -1, "deaths": 4, "wins": 4, "loses": 2}, {"name": "Player2", "kills": -1, "deaths": 5, "wins": 3, "loses": 5}, {"name": "", "kills": 0, "deaths": 0, "wins": 1, "loses": 0}]}
