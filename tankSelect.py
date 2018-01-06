@@ -1,4 +1,4 @@
-import pygame, init, os, text, colors,time
+import pygame, init, os, text, colors
 
 def tankSelect(player):
     files = list(f for f in os.listdir('.'+os.sep+'assets'+os.sep+'tanks') if os.path.isfile(os.path.join('.'+os.sep+'assets'+os.sep+'tanks',f)))
@@ -43,7 +43,6 @@ def tankSelect(player):
         
         init.clock.tick(60)
     player['tank']=images[pick]
-    time.sleep(0.2)
 
 def clickableImage(image,x,y, action=None):
     w,h = image.get_size()

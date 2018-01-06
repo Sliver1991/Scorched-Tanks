@@ -13,7 +13,7 @@ def message_display(text,size,color,loc_x,loc_y):
 
     pygame.display.update()
     
-def button(msg,x,y,w,h,tc,ts,ic,ac, action=None):
+def button(msg,x,y,w,h,tc,ts,ic,ac, action=None, wait=200):
     """msg: What do you want the button to say on it.
 
     x: The x location of the top left coordinate of the button box.
@@ -38,6 +38,7 @@ def button(msg,x,y,w,h,tc,ts,ic,ac, action=None):
 
         if click[0] == 1 and action != None:
             action()         
+            pygame.time.delay(wait)
     else:
         pygame.draw.rect(init.surface, ic,(x,y,w,h))
 

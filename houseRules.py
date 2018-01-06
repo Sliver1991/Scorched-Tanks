@@ -136,7 +136,7 @@ def rulesMenu():
             pygame.display.update()
             
             init.clock.tick(60)
-        time.sleep(0.1)
+        
     
     def mapMode():
         
@@ -173,7 +173,7 @@ def rulesMenu():
             pygame.display.update()
             
             init.clock.tick(60)
-        time.sleep(0.1)
+        
         
     def done():
         nonlocal status

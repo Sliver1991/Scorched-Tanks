@@ -7,10 +7,10 @@ def drawInterface():
     text.button("Guided",init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+610,100,30,guided,30,colors.GRAY,colors.RED1, toGuided)
     text.button("Crazy",init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+660,100,30,crazy,30,colors.GRAY,colors.RED1, toCrazy)
     text.button("Save",init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+860,100,30,colors.BLACK,30,colors.GRAY,colors.RED1, saveLoad.allSaves)
-    text.button("-",init.gameSize["width"]+20,init.gameSize["y"]+80,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, decPwr)
-    text.button("+",init.gameSize["width"]+259,init.gameSize["y"]+80,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, incPwr)
-    text.button("+",init.gameSize["width"]+140,init.gameSize["y"]+230,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, incAng)
-    text.button("-",init.gameSize["width"]+140,init.gameSize["y"]+300,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, decAng)
+    text.button("-",init.gameSize["width"]+20,init.gameSize["y"]+80,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, decPwr,0)
+    text.button("+",init.gameSize["width"]+259,init.gameSize["y"]+80,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, incPwr,0)
+    text.button("+",init.gameSize["width"]+140,init.gameSize["y"]+230,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, incAng,0)
+    text.button("-",init.gameSize["width"]+140,init.gameSize["y"]+300,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, decAng,0)
     text.message_display("Wind:",40,colors.GRAY,init.gameSize['x']+100,init.gameSize['height']+50)
     
 def drawStats(p,a,n):

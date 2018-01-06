@@ -46,13 +46,11 @@ def allLoad():
         nonlocal i
         if i+5<len(files):
             i+=1
-        time.sleep(0.1)
     
     def dec():
         nonlocal i
         if i>0:
             i-=1
-        time.sleep(0.1)
     
     while status:
         draw.drawSquare(200,50,init.screen[0]-400,init.screen[1]-100,colors.BLACK)

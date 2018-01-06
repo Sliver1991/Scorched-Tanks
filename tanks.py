@@ -1,4 +1,4 @@
-import init, pygame, equ,colors,text, draw, random, os
+import init, pygame, equ,colors,text, draw, random
 
 def findHeight(x):
     """Finds terrain height in given value of x"""

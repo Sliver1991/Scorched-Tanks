@@ -1,4 +1,4 @@
-import equ,tanks,init,draw,colors,time,pygame,text,math
+import equ,tanks,init,draw,colors,pygame,text,math
 
 rules = init.rules
 
@@ -53,7 +53,7 @@ def fire(tank,eq,angle,power=None):
     pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
     init.gameDisplay.blit(init.surface, (0, 0))
     pygame.display.update()
-    time.sleep(1)
+    pygame.time.delay(1000)
 
 def updateHeight(hit_x,hit_y,x):
     """Function updates the height at x coord in map according to hit spot"""

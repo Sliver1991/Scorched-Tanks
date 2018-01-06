@@ -9,7 +9,6 @@ def leaderboard():
     flag = True
     def sortLeaders():
         data.sort(key=lambda player:player[sortKey],reverse=flag)
-        time.sleep(0.2)
         
     sortLeaders()
     
@@ -57,7 +56,6 @@ def leaderboard():
     def done():
         nonlocal status
         status = 'quit'
-        time.sleep(0.2)
         
     
     status = "menu"
