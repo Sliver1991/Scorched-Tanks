@@ -1,56 +1,120 @@
-import init, pygame
+import init, pygame, equ,colors,text, draw, random, os
 
 def findHeight(x):
-    for pos_x,pos_y in init.gameMap:
+    """Finds terrain height in given value of x"""
+    for pos_x,pos_y in init.gameMap[1:-1]:
         if pos_x == x:
             return pos_y
-        
-theme = ["bibitank","kimtank","putintank","trumptank"]
 tanks = []
-teams = [["Slava"],["Daniel","Matias"],["Nadin"]]
-i=1
-for team in teams:
-    t = []
-    for p in team:
-        t.append({"player":p,"turn":i, "health":init.rules["health"]})
-        i+=1
-    tanks.append(t)
+teams = []
+theme = ["bibitank","kimtank","putintank","trumptank"]
+players = 0
 
-tankPos = []
-for team in tanks:
-    for tank in team:
-        tank["x"]=tank["turn"]*300
-        tank["y"]=findHeight(tank["x"])
-        tankPos.append([tank,tank["x"],tank["y"]])
-        
-players = i-1
+def turnOrder(playerCount):
+    turn = list(range(1,players+1))
+    random.shuffle(turn)
+    return turn
 
-def tankHit(x,y):
-    hit = []
-    for tank in tankPos:
-        if tank[1]-50<x<tank[1]+50 and tank[2]-50<y<tank[2]+50:
-            hit.append(tank[0])
-    if len(hit)==0:
-        return None
+def orderPlayers():
+    i=0
+    turn = turnOrder(players)
+    for team in tanks:
+        for tank in team:
+            tank['turn']=turn[i]
+            i+=1
+            
+def genPos(tank):
+    x = random.randint(init.gameSize["x"]+60,init.gameSize['width']-60)
+    y = findHeight(x)-50
+    if hitAnyTank(x,y) or hitAnyTank(x-50,findHeight(x-50)-50) or hitAnyTank(x+50,findHeight(x+50)-50):
+        genPos(tank)
     else:
-        return hit
-
-def drawTank(tank,angle=15):
-    if angle<90:
-        init.surface.blit(pygame.image.load(theme[tank["turn"]-1]+".png"), (tank['x'],tank['y']-100))
-    else:
-        init.surface.blit(pygame.image.load(theme[tank["turn"]-1]+"mirror.png"), (tank['x'],tank['y']-100))
-
-def checkEnd():
-    players = []
+        tank['x']=x
+        tank['y']=y
+            
+def genTanks():        
+    global tanks
+    tanks = []
     for team in teams:
         t = []
+        for p in team:
+            t.append({"player":p, "health":init.rules["health"], "dead":False, "kills":0, "x":-1000, "y":-1000})
+        tanks.append(t)
+    orderPlayers()
+    for team in tanks:
         for tank in team:
-            if tank["health"]>0:
-                t.append(tank)
-        players.append(t)
-    if len(players)==0:
+            genPos(tank)
+
+#    tankPos = []
+#    for team in tanks:
+#        for tank in team:
+#            tank["x"]=tank["turn"]*300
+#            tank["y"]=findHeight(tank["x"])-50
+#            tankPos.append([tank,tank["x"],tank["y"]])
+
+def tanksDamaged(x,y):
+    """Handles damaging mechanism. Using the blast center, updates HP of all damaged tanks.
+    Returns true if any tank is damaged, false otherwise"""
+    flag = False
+    deathCount = 0
+    for team in tanks:
+        for tank in team:
+            if not tank['dead']:
+                damage = int(init.rules['damage']*tankDamage(x,y,tank))
+                if damage>0:
+                    text.message_display(str(damage),30,colors.RED1,tank['x'],tank['y']-80)
+                    if updateHP(tank,damage):
+                        deathCount+=1
+                    flag = True
+    return flag,deathCount
+
+def updateHP(tank,damage):
+    """Updates HP of damaged tank. If tank is destroyed, updates stat and moves to graveyard"""
+    tank['health']=max(tank['health']-damage,0)
+    if tank['health']==0:
+        tank['dead']=True
         return True
     return False
+
+def tankDamage(x,y, tank):
+    """Returns how close a tank is to the blast center in relation to radius"""
+    dist = max(equ.distance(tank['x'],tank['y'],x,y)-50,0)
+    if dist<init.rules['radius']:
+        return 1-(dist/init.rules['radius'])
+    else:
+        return 0
     
+def hitAnyTank(x,y):
+    """Returns true if any tank is located at x,y"""
+    for team in tanks:
+        for tank in team:
+            if tankHit(x,y,tank):
+                return True
+    return False
     
+def tankHit(x,y,tank):
+    """Returns true if tank is located at x,y"""
+    return tank['x']-50<=x<=tank['x']+50 and tank['y']-50<=y<=tank['y']+50 and not tank['dead']
+
+def drawTank(tank,angle=15):
+    """Draws tank to map"""
+    if tank['dead']:
+        return
+    drawHP(tank)
+    image = pygame.image.load("." +os.sep+"assets"+os.sep+"tanks"+os.sep+theme[tank["turn"]-1]+".png")
+    if angle>90:
+        image = pygame.transform.flip(image,True,False)    
+    init.surface.blit(image, (tank['x']-50,tank['y']-50))
+    
+def drawHP(tank):
+    x = tank['x']-50
+    y = tank['y']-70
+    hp = int(tank['health']/init.rules['health']*98)
+    draw.drawSquare(x,y,100,15,colors.RED1)
+    draw.drawSquare(x+1,y+1,hp,13,colors.GREEN)
+    
+def drawCurr(tank):
+    x = tank['x']
+    y = tank['y']-80
+    poly = [(x,y),(x+45,y-20),(x+20,y-20),(x+20,y-50),(x-20,y-50),(x-20,y-20),(x-45,y-20)]
+    draw.drawPoly(colors.GREEN,poly)

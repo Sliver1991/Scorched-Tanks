@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Dec 24 08:30:41 2017
-
-@author: Slava
-"""
-
 """Provide RGB color constants and a colors dictionary with
 elements formatted: colors[colorname] = CONSTANT"""
 

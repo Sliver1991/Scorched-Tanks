@@ -5,7 +5,7 @@ def text_objects(text, font,color):
     return textSurface, textSurface.get_rect()
 
 def message_display(text,size,color,loc_x,loc_y):
-    #Text appears with loc_x and loc_y it's center
+    """Text appears with loc_x and loc_y it's center"""
     largeText = pygame.font.Font('freesansbold.ttf',size)
     TextSurf, TextRect = text_objects(text, largeText, color)
     TextRect.center = ((loc_x),(loc_y))

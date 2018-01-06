@@ -15,3 +15,11 @@ def drawCircle(loc_x,loc_y, radius, color):
     
 def drawPoly(color,locList):
     pygame.draw.polygon(init.surface, color,locList)
+    
+def drawLeftArrow(color, x,y):
+    poly = [(x,y),(x-10,y-15),(x,y-30),(x-10,y-30),(x-20,y-15),(x-10,y)]
+    drawPoly(color,poly)
+    
+def drawRightArrow(color, x,y):
+    poly = [(x,y),(x+10,y-15),(x,y-30),(x+10,y-30),(x+20,y-15),(x+10,y)]
+    drawPoly(color,poly)

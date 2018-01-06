@@ -1,46 +1,78 @@
-import equ,tanks, init,draw,colors,text,time,pygame
+import equ,tanks,init,draw,colors,time,pygame,text,math
 
 rules = init.rules
 
-def fire(posx,posy,eq,angle,power=None):
-    x = 1
-    y = int(nexty(eq,x,angle,power))
-    x,y = equ.coordinatefixer(x,y)
-    print(posx,posy,x,y)
-    traj = []
-    while y>tanks.findHeight(x+posx) and tanks.tankHit(x+posx,y+posy)==None and x+posx<init.gameSize["width"]+init.gameSize["x"]: 
-        traj.append((x,y))
-        x+=1
-        y = int(nexty(eq,x,angle,power))
-        x,y = equ.coordinatefixer(x,y)
-        draw.drawPixel(x+posx,y+posy,colors.BLACK)
-        
-    hitlist = []
+def fire(tank,eq,angle,power=None):
+    """Handles Fire mechanism,
+    tank - active player firing
+    eq - function handling the firing equation
+    angle - angle of firing
+    power - power of firing"""
+    init_x, init_y = tank['x'], tank['y']
+    x, y, t = 0, 0, 0
+    while tanks.tankHit(x+init_x,init_y-y,tank):
+        t+=1
+        if eq.__name__ != 'crazy':
+            x,y=equ.linear(angle,-1,t)
+        else:
+            x,y=equ.linear(0,-1,t)
+#        draw.drawPixel(x+init_x,init_y-y,colors.RED1)
+    init_x, init_y  = init_x+x, init_y-y
+    line = (init_x, init_y)
+    t = 0
+    while not tanks.hitAnyTank(x+init_x,init_y-y)  and init.gameSize['x']<x+init_x<init.gameSize["width"] and -500<init_y-y<tanks.findHeight(x+init_x) :
+        t+=1
+        x,y=eq(angle,power,t)
+        line = line[-2:]+(init_x+x,init_y-y)
+        if init.gameSize['x']<line[0]<init.gameSize['x']+init.gameSize['width'] \
+            and init.gameSize['y']<line[1]: 
+                draw.drawLine(*line,2,colors.RED1)
+        pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+        init.gameDisplay.blit(init.surface, (0, 0))
+        pygame.display.update()
     
-    for xrad in range(x+(-1)*init.rules["radius"]//2,x+init.rules["radius"]//2):
-        hit = tanks.tankHit(xrad,tanks.findHeight(xrad))
-        if hit!=None:
-            for tank in hit:
-                if tank not in hitlist:
-                    damage = rules["damage"]*(1-equ.distance(xrad,tanks.findHeight(xrad),tank['x'],tank['y'])/rules["radius"])
-                    tank["health"]-=damage
-                    text.message_display(str(damage),30,colors.RED1,tank['x'],tank['y']-90)
-                    hitlist.append(tank)
-    if len(hitlist)==0:
-        text.message_display("MISSED",50,colors.RED1,(init.gameSize["x"]+init.gameSize["width"])/2,init.gameSize["y"]+200)
+        init.clock.tick(60)
+    flag, deathCount = tanks.tanksDamaged(x+init_x,init_y-y)
+    if tank['dead']==True:
+        deathCount-=2
+    tank["kills"]+=deathCount
+    damageMap(x+init_x,init_y-y)
+    i=0
+    
+    while i<init.rules['radius']:
+        i+=init.rules['radius']//30
+        draw.drawCircle(int(x+init_x),int(init_y-y),i,colors.RED4)
+        pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+        init.gameDisplay.blit(init.surface, (0, 0))
+        pygame.display.update()
+        init.clock.tick(60)
+        
+    if not flag:
+        text.message_display("Missed!",30,colors.RED1,tank['x'],tank['y']-80)
+    
     pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
     init.gameDisplay.blit(init.surface, (0, 0))
     pygame.display.update()
     time.sleep(1)
-                    
-    
-def nexty(eq,x,angle,power=None):
-    if eq == 'linear':
-        y=equ.linear(angle,x)
-    elif eq == 'ballistic':
-        y=equ.ballistic(angle,power,x)
-    elif eq == 'guided':
-        y=equ.guided(angle,power,x)
-    elif eq== 'crazy':
-        y=equ.crazy(angle,power,x)
-    return y
+
+def updateHeight(hit_x,hit_y,x):
+    """Function updates the height at x coord in map according to hit spot"""
+    loc = [x,tanks.findHeight(x)]
+    y = loc[1]
+    index = init.gameMap.index(loc,1)
+    b,c = hit_x-x,init.rules['radius']
+    a = int(math.sqrt(c**2-b**2))
+    destUpper, destLower = hit_y-a, hit_y+a
+    if y<destUpper:
+        init.gameMap[index][1]+=2*a
+    elif y<destLower:
+        init.gameMap[index][1]+=(destLower-y)
+    if init.gameMap[index][1]>init.gameSize['height']-50:
+        init.gameMap[index][1]=init.gameSize['height']-50
+        
+def damageMap(hit_x,hit_y):
+    for x in range(max(init.gameSize['x'],hit_x-init.rules['radius']),min(init.gameSize['width'],hit_x+init.rules['radius'])):
+        updateHeight(hit_x,hit_y,x)
+    for team in tanks.tanks:
+        for tank in team:
+            tank["y"]=tanks.findHeight(tank["x"])-50
