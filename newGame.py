@@ -1,11 +1,13 @@
-import init, text, textInput, draw, colors, pygame, time, tanks
+import init, text, textInput, draw, colors, pygame, time, tanks, tankSelect, os
+
+default = pygame.image.load("."+os.sep+"assets"+os.sep+"tanks"+os.sep+"bibitank.png")
 
 def playersInput():
     
-    player1 = {"name":"Player1", "enabled":True,"team":1}
-    player2 = {"name":"Player2", "enabled":True,"team":2}
-    player3 = {"name":"", "enabled":False,"team":3}
-    player4 = {"name":"", "enabled":False,"team":4}
+    player1 = {"name":"Player1", "enabled":True,"team":1,"tank":default}
+    player2 = {"name":"Player2", "enabled":True,"team":2,"tank":default}
+    player3 = {"name":"", "enabled":False,"team":3,"tank":default}
+    player4 = {"name":"", "enabled":False,"team":4,"tank":default}
     
     def check3():
         if player3['enabled']: 
@@ -163,12 +165,24 @@ def playersInput():
         text.button(player3['name'],420,390,500,50,colors.BLACK,45,colors.WHITE,colors.WHITE,input3)
         text.button(player4['name'],420,460,500,50,colors.BLACK,45,colors.WHITE,colors.WHITE,input4)
         
-        text.message_display("teams",20,colors.WHITE,940,225)
+        text.message_display("Teams",20,colors.WHITE,940,225)
         
         text.button(str(player1['team']),930,250,50,50,colors.BLACK,45,colors.GRAY,colors.GRAY)
         text.button(str(player2['team']),930,320,50,50,colors.BLACK,45,colors.GRAY,colors.GRAY,select2)
         text.button(str(player3['team']) if player3['enabled'] else "",930,390,50,50,colors.BLACK,45,colors.GRAY,colors.WHITE,select3)
         text.button(str(player4['team']) if player4['enabled'] else "",930,460,50,50,colors.BLACK,45,colors.GRAY,colors.WHITE,select4)
+        
+        text.message_display("Tanks",20,colors.WHITE,1050,225)
+        tankSelect.clickableImage(pygame.transform.scale(player1['tank'],(50,50)),1000,250,lambda:tankSelect.tankSelect(player1))
+        tankSelect.clickableImage(pygame.transform.scale(player2['tank'],(50,50)),1000,320,lambda:tankSelect.tankSelect(player2))
+        if player3['enabled']:
+            tankSelect.clickableImage(pygame.transform.scale(player3['tank'],(50,50)),1000,390,lambda:tankSelect.tankSelect(player3))
+        else:
+            draw.drawSquare(1000,390,50,50,colors.WHITE)
+        if player4['enabled']:
+            tankSelect.clickableImage(pygame.transform.scale(player4['tank'],(50,50)),1000,460,lambda:tankSelect.tankSelect(player4))
+        else:
+            draw.drawSquare(1000,460,50,50,colors.WHITE)
         
         text.button("Continue",init.screen[0]//2-200,900,400,70,colors.BLACK,60,colors.WHITE,colors.GREEN, done)
         
@@ -202,9 +216,9 @@ def drawV(x,y):
     
 def generateTeams(players):
     players = [player for player in players if player['enabled']]
-    team1 = [player['name'] for player in players if player['team']==1]
-    team2 = [player['name'] for player in players if player['team']==2]
-    team3 = [player['name'] for player in players if player['team']==3]
-    team4 = [player['name'] for player in players if player['team']==4]
+    team1 = [(player['name'],player['tank']) for player in players if player['team']==1]
+    team2 = [(player['name'],player['tank'])  for player in players if player['team']==2]
+    team3 = [(player['name'],player['tank'])  for player in players if player['team']==3]
+    team4 = [(player['name'],player['tank'])  for player in players if player['team']==4]
     tanks.teams = [team for team in [team1,team2,team3,team4] if len(team)>0]
     tanks.players = len(players)

@@ -7,7 +7,6 @@ def findHeight(x):
             return pos_y
 tanks = []
 teams = []
-theme = ["bibitank","kimtank","putintank","trumptank"]
 players = 0
 
 def turnOrder(playerCount):
@@ -38,7 +37,7 @@ def genTanks():
     for team in teams:
         t = []
         for p in team:
-            t.append({"player":p, "health":init.rules["health"], "dead":False, "kills":0, "x":-1000, "y":-1000})
+            t.append({"player":p[0], "tank":p[1], "health":init.rules["health"], "dead":False, "kills":0, "x":-1000, "y":-1000})
         tanks.append(t)
     orderPlayers()
     for team in tanks:
@@ -101,7 +100,7 @@ def drawTank(tank,angle=15):
     if tank['dead']:
         return
     drawHP(tank)
-    image = pygame.image.load("." +os.sep+"assets"+os.sep+"tanks"+os.sep+theme[tank["turn"]-1]+".png")
+    image = tank['tank']
     if angle>90:
         image = pygame.transform.flip(image,True,False)    
     init.surface.blit(image, (tank['x']-50,tank['y']-50))
