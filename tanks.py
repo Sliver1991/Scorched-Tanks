@@ -96,7 +96,7 @@ def drawTank(tank,angle=15):
     image = tank['tank']
     if angle>90:
         image = pygame.transform.flip(image,True,False)    
-    init.surface.blit(image, (tank['x']-50,tank['y']-50))
+    draw.drawImage(image, tank['x']-50,tank['y']-50)
     
 def drawHP(tank):
     x = tank['x']-50

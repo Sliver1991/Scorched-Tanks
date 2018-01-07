@@ -131,7 +131,7 @@ def rulesMenu():
                     if event.key == pygame.K_ESCAPE:
                         state = False
             
-            pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+            pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
             init.gameDisplay.blit(init.surface, (0, 0))
             pygame.display.update()
             
@@ -168,7 +168,7 @@ def rulesMenu():
                     if event.key == pygame.K_ESCAPE:
                         state = False
             
-            pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+            pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
             init.gameDisplay.blit(init.surface, (0, 0))
             pygame.display.update()
             
@@ -198,7 +198,7 @@ def rulesMenu():
                 if event.key == pygame.K_ESCAPE:
                     status = "quit"
         
-        pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+        pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
         init.gameDisplay.blit(init.surface, (0, 0))
         pygame.display.update()
         

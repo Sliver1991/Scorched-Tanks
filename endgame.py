@@ -41,7 +41,7 @@ def endGame():
             for i in range(len(messages)):
                 text.message_display(messages[i],30,colors.WHITE,init.gameSize["width"]//2,400+i*50)
             
-            pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+            pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
             init.gameDisplay.blit(init.surface, (0, 0))
             pygame.display.update()
             for event in pygame.event.get():
@@ -49,7 +49,7 @@ def endGame():
                     if event.key == pygame.K_ESCAPE:
                         status = False
             
-            pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+            pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
             init.gameDisplay.blit(init.surface, (0, 0))
             pygame.display.update()
             

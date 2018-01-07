@@ -55,7 +55,7 @@ def textBox(msg,string = ""):
                     string = string[:-1]
           
         text.message_display(string,40,colors.BLACK,init.screen[0]//2,620)          
-        pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+        pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
         init.gameDisplay.blit(init.surface, (0, 0))
         pygame.display.update()
         

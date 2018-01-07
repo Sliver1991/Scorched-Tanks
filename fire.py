@@ -27,7 +27,7 @@ def fire(tank,eq,angle,power=None):
         if init.gameSize['x']<line[0]<init.gameSize['x']+init.gameSize['width'] \
             and init.gameSize['y']<line[1]: 
                 draw.drawLine(*line,2,colors.RED1)
-        pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+        pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
         init.gameDisplay.blit(init.surface, (0, 0))
         pygame.display.update()
     
@@ -42,7 +42,7 @@ def fire(tank,eq,angle,power=None):
     while i<init.rules['radius']:
         i+=init.rules['radius']//30
         draw.drawCircle(int(x+init_x),int(init_y-y),i,colors.RED4)
-        pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+        pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
         init.gameDisplay.blit(init.surface, (0, 0))
         pygame.display.update()
         init.clock.tick(60)
@@ -50,7 +50,7 @@ def fire(tank,eq,angle,power=None):
     if not flag:
         text.message_display("Missed!",30,colors.RED1,tank['x'],tank['y']-80)
     
-    pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+    pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
     init.gameDisplay.blit(init.surface, (0, 0))
     pygame.display.update()
     pygame.time.delay(1000)

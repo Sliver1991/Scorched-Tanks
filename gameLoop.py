@@ -74,7 +74,7 @@ def gameLoop():
                 
         interface.drawInterface()
         interface.drawStats(player.power,player.angle,player.active)
-        pygame.transform.scale(init.surface, (init.screen[0], init.screen[1]))
+        pygame.transform.scale(init.surface, (init.res["width"],init.res["height"])) 
         init.gameDisplay.blit(init.surface, (0, 0))
         pygame.display.update()
         

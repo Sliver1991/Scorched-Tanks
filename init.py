@@ -1,4 +1,4 @@
-import pygame, ctypes
+import pygame, ctypes, os
 
 pygame.init()
 width, height = pygame.display.list_modes()[0]
@@ -15,4 +15,4 @@ rules = {"radius":100,"damage":100,"health":100, "gravity":-9.8, "wind":0, "map"
 #ameDisplay = pygame.display.set_mode((0, 0),pygame.FULLSCREEN)
 pygame.display.set_caption('Scorched Tanks')
 
-
+sky =  pygame.image.load("."+os.sep+"assets"+os.sep+"sky"+os.sep+"sky1.jpg")
