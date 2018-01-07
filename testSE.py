@@ -1,4 +1,4 @@
-import pygame,unittest, equ, tanks
+import pygame,unittest, equ, tanks,draw, interface, gameLoop
 
 class TestSE(unittest.TestCase):
     
@@ -42,7 +42,42 @@ class TestSE(unittest.TestCase):
         turn = tanks.turnOrder(players)
         self.assertTrue(turn==[1,2] or turn==[2,1],'Turn Order Failed')
         
+    def testDrawSquare(self):
+        self.assertTrue(draw.drawSquare(1,1,1,1,1,True),"Draw Failed")
 
+    def testDrawPixel(self):
+        self.assertTrue(draw.drawPixel(1,1,1,True),"Draw Failed")
+        
+    def testDrawLine(self):
+        self.assertTrue(draw.drawLine(1,1,1,1,1,1,True),"Draw Failed")
+        
+    def testDrawCircle(self):
+        self.assertTrue(draw.drawCircle(1,1,1,1,True),"Draw Failed")
+        
+    def testDrawPoly(self):
+        self.assertTrue(draw.drawPoly(1,1,True),"Draw Failed")
+        
+    def testDrawLeftArrow(self):
+        self.assertTrue(draw.drawLeftArrow(1,1,1,True),"Draw Failed")
+        
+    def testDrawRightArrow(self):
+        self.assertTrue(draw.drawRightArrow(1,1,1,True),"Draw Failed")
+        
+    def testDrawImage(self):
+        self.assertTrue(draw.drawImage(1,1,1,1,1,1,True),"Draw Failed")
+    
+    def testInterface(self):
+        self.assertTrue(interface.drawInterface(True),"Interface Failed")
+          
+    def testStats(self):
+        self.assertTrue(interface.drawStats(1,1,1,True),"Stats Failed") 
+        
+    def testGameLoop(self):
+        self.assertTrue(gameLoop.gameLoop(True),"Game Loop Failed")
+        
+    def testCycle(self):
+        self.assertTrue(gameLoop.gameCycle(True),"Game Cycle Failed")
+        
 unittest.main()
 
 pygame.quit()

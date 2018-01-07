@@ -1,7 +1,9 @@
 import pygame,init, mapDraw, draw,tanks, leaderboard
 import interface,player,fire, endgame,mainMenu,saveLoad, newGame, houseRules, mapGen
 
-def gameLoop():
+def gameLoop(test=False):
+    if test:
+        return test
     """Game LOOOOOOP"""
     global game            
     while game:
@@ -80,7 +82,9 @@ def gameLoop():
         
         init.clock.tick(60)
 
-def gameCycle():
+def gameCycle(test=False):
+    if test:
+        return test
     mainMenu.menu()
     global game
     if mainMenu.game == 'new':

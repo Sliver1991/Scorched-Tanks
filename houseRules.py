@@ -1,7 +1,8 @@
 import init, text, colors, pygame, textInput, draw
 
-def rulesMenu():
-    
+def rulesMenu(test=False):
+    if test:
+        return test
     def health():
         hp = textInput.textBox("Enter Starting Health",str(init.rules['health']))
         if hp=="":
@@ -151,7 +152,7 @@ def rulesMenu():
             state = False
             
         def slope():
-            init.rules['map']='round'
+            init.rules['map']='slope'
             nonlocal state
             state = False
         state = True

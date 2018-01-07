@@ -65,7 +65,7 @@ def mapGen():
             slope = random.choice(["quad","lin"])
         elif mode=="straight":
             slope = "lin"
-        elif mode=="round":
+        elif mode=="slope":
             slope="quad"
         slope_len = random.randint(100,500)
         if slope=="quad":

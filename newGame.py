@@ -2,8 +2,9 @@ import init, text, textInput, draw, colors, pygame, time, tanks, tankSelect, os
 
 default = pygame.image.load("."+os.sep+"assets"+os.sep+"tanks"+os.sep+"bibitank.png")
 
-def playersInput():
-    
+def playersInput(test=False):
+    if test:
+        return test
     player1 = {"name":"Player1", "enabled":True,"team":1,"tank":default}
     player2 = {"name":"Player2", "enabled":True,"team":2,"tank":default}
     player3 = {"name":"", "enabled":False,"team":3,"tank":default}
@@ -209,12 +210,16 @@ def playersInput():
     return status
         
 
-def drawV(x,y):
+def drawV(x,y,test=False):
     """Draws checkmark x,y are upper corner of square"""
+    if test:
+        return test
     draw.drawLine(x+5,y+20,x+25,y+40,6,colors.BLUE)
     draw.drawLine(x+25,y+40,x+45,y+5,6,colors.BLUE)
     
-def generateTeams(players):
+def generateTeams(players, test=False):
+    if test:
+        return test
     players = [player for player in players if player['enabled']]
     team1 = [(player['name'],player['tank']) for player in players if player['team']==1]
     team2 = [(player['name'],player['tank'])  for player in players if player['team']==2]

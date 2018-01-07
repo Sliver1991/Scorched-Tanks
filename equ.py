@@ -19,7 +19,6 @@ def ballistic(angle,power,time):
 
 def guided(angle,power,time):
     
-    ###########  TODO:FIX THIS      ############
     reverse = False
     x=time*10
     if angle<90:

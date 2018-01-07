@@ -1,6 +1,8 @@
 import init,text,colors,saveLoad, tanks,equ,draw, player, pygame, os
 
-def drawInterface():
+def drawInterface(test=False):
+    if test:
+        return test
     text.message_display("Firing Mode:",50,colors.RED1,init.gameSize["x"]+init.gameSize["width"]+70,init.gameSize["y"]+450)
     text.button("Linear",init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+510,100,30,linear,30,colors.GRAY,colors.RED1,toLinear)
     text.button("Ballistic",init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+560,100,30,ballistic,30,colors.GRAY,colors.RED1,toBallistic)
@@ -13,7 +15,9 @@ def drawInterface():
     text.button("-",init.gameSize["width"]+140,init.gameSize["y"]+300,25,30,colors.WHITE,25,colors.BLACK,colors.RED1, decAng,0)
     text.message_display("Wind:",40,colors.GRAY,init.gameSize['x']+100,init.gameSize['height']+50)
     
-def drawStats(p,a,n):
+def drawStats(p,a,n,test=False):
+    if test:
+        return test
     text.message_display("Power:",50,colors.RED1,init.gameSize["x"]+init.gameSize["width"]+30,init.gameSize["y"]+40)
     drawPwr(p)
     text.message_display(str(p),30,colors.RED1,init.gameSize["x"]+init.gameSize["width"]+10,init.gameSize["y"]+130)
