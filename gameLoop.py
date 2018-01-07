@@ -1,4 +1,4 @@
-import pygame,init, mapDraw, colors,tanks, leaderboard
+import pygame,init, mapDraw, draw,tanks, leaderboard
 import interface,player,fire, endgame,mainMenu,saveLoad, newGame, houseRules, mapGen
 
 def gameLoop():
@@ -61,7 +61,7 @@ def gameLoop():
                   
         
             
-        init.surface.fill(colors.BLACK)
+        draw.drawImage(init.bg,0,0,True)
         mapDraw.gameFrame()
         mapDraw.drawMap()
         for team in tanks.tanks:

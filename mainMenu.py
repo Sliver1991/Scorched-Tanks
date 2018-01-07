@@ -1,12 +1,11 @@
-import text,init,colors,pygame
+import text,init,colors,pygame,draw
 
 game = 'menu'
 
 def menu():
     global game
     while game=='menu':
-        init.surface.fill(colors.BLACK)
-        	
+        draw.drawImage(init.bg,0,0,True)
         text.button("Start Game" , 650 , 100 , 550 , 100, colors.BLACK , 80 , colors.GRAY , colors.GREEN, newGame)
         text.button("Load Game" , 650 , 300 , 550 , 100 , colors.BLACK , 80 , colors.GRAY , colors.GREEN, loadGame)
         text.button("Leaderboards" , 650 , 500 , 550 , 100 , colors.BLACK , 80 , colors.GRAY , colors.GREEN,leaderboard)

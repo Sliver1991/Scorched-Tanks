@@ -181,7 +181,7 @@ def rulesMenu():
     
     status = "menu"
     while status=="menu":
-        init.surface.fill(colors.BLACK)
+        draw.drawImage(init.bg,0,0,True)
         text.message_display("House Rules",50,colors.WHITE,init.screen[0]//2,100)
         
         text.button("Starting Health: {}".format(init.rules["health"]),500,250,init.screen[0]-1000,50,colors.BLACK,45,colors.WHITE,colors.GREEN, health)

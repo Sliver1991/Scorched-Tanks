@@ -16,3 +16,4 @@ rules = {"radius":100,"damage":100,"health":100, "gravity":-9.8, "wind":0, "map"
 pygame.display.set_caption('Scorched Tanks')
 
 sky =  pygame.image.load("."+os.sep+"assets"+os.sep+"sky"+os.sep+"sky1.jpg")
+bg =  pygame.image.load("."+os.sep+"assets"+os.sep+"bg.jpg")

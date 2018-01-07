@@ -47,13 +47,20 @@ def clean():
     gameMap=cleanedMap
 
 gameSize = {"x":96, "y":54,"width":1536, "height":918}
+
 def mapGen():
     global gameMap
     mode = init.rules["map"]
     gameMap = [[gameSize['x'],gameSize['height']]]
     x,y = gameSize['x'], gameSize['height']-random.randint(50,750)
     while x<gameSize['width']:
-        angle = random.randint(-80,80)
+        last_y = gameMap[-1][1]
+        if last_y==gameSize['y']+150:
+            angle = random.randint(-80,0)
+        elif last_y==gameSize['height']-50:
+            angle = random.randint(0,80)
+        else:
+            angle = random.randint(-80,80)
         if mode=="mixed":
             slope = random.choice(["quad","lin"])
         elif mode=="straight":

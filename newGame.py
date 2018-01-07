@@ -148,7 +148,7 @@ def playersInput():
         
     status = "input"
     while status=="input":
-        init.surface.fill(colors.BLACK)
+        draw.drawImage(init.bg,0,0,True)
         text.message_display("Enter Players",50,colors.WHITE,init.screen[0]//2,100)
         
         text.message_display("En",20,colors.WHITE,370,230)
